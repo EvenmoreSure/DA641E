@@ -48,20 +48,23 @@ void loop() {
     Serial.println(key);
     input_password += key; // append new character to input password string
 
-     if (input_password.length() == password.length()) {
-      if (password == input_password) {
+   //  if (input_password.length() == password.length()) {
+   //   if (password == input_password) {
+     
+     if(key == '*'){
         Serial.println("password is correct");
         // DO YOUR WORK HERE
-        unlockServo();
+       // unlockServo();
+       myservo.write(180);
       
-      } else {
+      } else if (key == '#'){
         Serial.println("password is incorrect, try again");
-
+    myservo.write(0);
       }
       input_password = ""; // clear input password
 
     }
-  }
+  
   delay(100);
 }
 
