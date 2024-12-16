@@ -10,7 +10,7 @@ char hexaKeys[ROWS][COLS] = {
   {'*', '0', '#'}
 };
 
-// pins for the black keyboard
+// pins for the BLACK keyboard
 byte rowPins[ROWS] = {5, 6, 7, 8}; //connect to the row pinouts of the keypad
 byte colPins[COLS] = {2, 3, 4}; //connect to the column pinouts of the keypad
 
@@ -23,6 +23,7 @@ String input_password;
 void setup() {
   Serial.begin(9600);
   input_password.reserve(32); // maximum input characters is 33, change if needed
+
 }
 
 void loop() {
