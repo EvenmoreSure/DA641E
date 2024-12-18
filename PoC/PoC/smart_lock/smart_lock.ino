@@ -59,7 +59,7 @@ void loop() {
       
       } else if (key == '#'){
         Serial.println("password is incorrect, try again");
-    myservo.write(0);
+         myservo.write(0);
       }
       input_password = ""; // clear input password
 
