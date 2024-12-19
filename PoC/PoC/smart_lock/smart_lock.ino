@@ -56,20 +56,16 @@ void loop() {
     Serial.println(key);
     input_password += key;  // append new character to input password string
 
-    //  if (input_password.length() == password.length()) {
-    //   if (password == input_password) {
-
-    if (key == '*') {
-      Serial.println("password is correct");
-      // DO YOUR WORK HERE
-      // unlockServo();
-      myservo.write(180);
-
-    } else if (key == '#') {
-      Serial.println("password is incorrect, try again");
-      myservo.write(0);
+    if (input_password.length() == password.length()) {   // will automatically check password if the correct length
+       if (password == input_password) {
+         Serial.println("password is correct");
+         unlockServo();
+        
+        }else{
+          Serial.println("password is incorrect, try again");
+          input_password = "";  // clear input password
+        }
     }
-    input_password = "";  // clear input password
   }
 
   if (currentDoorState == UNLOCKED) {
@@ -77,7 +73,7 @@ void loop() {
     // should it just be a delay and then lock?
   }
 
-  delay(100);
+  delay(100); // Necessary delay for keypad to work.
 }
 
 
