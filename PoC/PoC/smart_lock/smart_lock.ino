@@ -32,6 +32,12 @@ int pos = 0;  // variable to store the servo position
 const String password = "123";  // change your password here
 String input_password;
 
+//************************STATE****************//
+enum DOORSTATE { LOCKED,
+                 UNLOCKED };
+DOORSTATE currentDoorState;
+
+
 void setup() {
   Serial.begin(9600);
 
@@ -39,6 +45,8 @@ void setup() {
 
 
   input_password.reserve(32);  // maximum input characters is 33, change if needed
+
+  currentDoorState = LOCKED;
 }
 
 void loop() {
@@ -63,6 +71,12 @@ void loop() {
     }
     input_password = "";  // clear input password
   }
+
+  if (currentDoorState == UNLOCKED) {
+    // add handle for WHEN we want to lock the door again
+    // should it just be a delay and then lock?
+  }
+
   delay(100);
 }
 
@@ -73,6 +87,7 @@ void unlockServo() {
     myservo.write(pos);                  // tell servo to go to position in variable 'pos'
     delay(15);                           // waits 15ms for the servo to reach the position
   }
+  currentDoorState = UNLOCKED;
 }
 
 void lockServo() {
@@ -81,4 +96,5 @@ void lockServo() {
     myservo.write(pos);  // tell servo to go to position in variable 'pos'
     delay(15);           // waits 15ms for the servo to reach the position
   }
+  currentDoorState = LOCKED;
 }
