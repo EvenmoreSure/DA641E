@@ -49,9 +49,11 @@ void setup() {
 
   myservo.attach(9);
 
+  u8g2.begin();
 
   input_password.reserve(32);  // maximum input characters is 33, change if needed
 
+  writeTextToDisplay("Write pincode");
   currentDoorState = LOCKED;
 }
 
