@@ -29,6 +29,9 @@ Servo myservo;  // create servo object to control a servo
 
 int pos = 0;  // variable to store the servo position
 
+//***************DISPLAY**********************///
+U8G2_SH1107_SEEED_128X128_F_HW_I2C u8g2(U8G2_R0, /* reset=*/U8X8_PIN_NONE);
+
 
 //***************PASSWORD**********************///
 
