@@ -63,16 +63,15 @@ void loop() {
   if (key) {
     Serial.println(key);
     input_password += key;  // append new character to input password string
+    
     // update screen with new length of pincode
-  //passwordToStars(input_password);
- // char* toDisplay = input_password.length() == 1 ? "x" : input_password.length() == 2 ? "xx" : input_password.length() == 3 ? "xxx" : "Write pincode";
-   //char* test = "x";
    if(input_password.length() > 0){
     writeTextToDisplay(passwordToStars(input_password));
    }
     if (input_password.length() == password.length()) {   // will automatically check password if the correct length
        if (password == input_password) {
          Serial.println("password is correct");
+         writeTextToDisplay("Welcome");
          unlockServo();
         
         }else{
@@ -89,6 +88,9 @@ void loop() {
   if (currentDoorState == UNLOCKED) {
     // add handle for WHEN we want to lock the door again
     // should it just be a delay and then lock?
+    delay(15000);
+    lockServo();
+    input_password = "";
   }
 
   delay(100); // Necessary delay for keypad to work.
@@ -114,14 +116,6 @@ void lockServo() {
 }
 
 char* passwordToStars(String psw){
-/**  String newPassword;
-  for(int i = 0; i < psw.length(); i++){
-    newPassword += "*";
-  }
-  Serial.println(newPassword);
-  char pswinchar[psw.length()];
-  newPassword.toCharArray(pswinchar,psw.length()+1);
-  return pswinchar;*/
   int len = psw.length(); 
   char* newPassword;
   if( len == 1) {
@@ -137,7 +131,6 @@ char* passwordToStars(String psw){
 }
 
 void writeTextToDisplay(char* text){
-  Serial.println("write text to display");
   u8g2.clearBuffer();                 // clear the internal memory
   u8g2.setFont(u8g2_font_ncenB12_tr); // choose a suitable font and size
   u8g2.drawStr(0,14,text);          // write something to the internal memory
